@@ -4,7 +4,7 @@
 
 ### 1.1 Download the files from Crowdin
 
-https://joomla.crowdin.com/u/projects/18/l/ko HALLLLO
+https://joomla.crowdin.com/u/projects/18/l/ko HALLLLO Moin
 
 ### 1.2 Remove the files in the /scoure folder and copy the files from the Crowdin folder into the /source folder
 
