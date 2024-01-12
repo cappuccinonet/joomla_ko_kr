@@ -14,6 +14,7 @@
 	<packagerurl>www.joomla.org</packagerurl>
 	<description><![CDATA[ko-KR 한국어 언어팩]]></description>
 	<blockChildUninstall>true</blockChildUninstall>
+	<scriptfile>script.php</scriptfile>
 	<files>
 		<folder type="language" client="site" id="ko-KR">site_ko-KR.zip</folder>
 		<folder type="language" client="administrator" id="ko-KR">admin_ko-KR.zip</folder>

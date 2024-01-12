@@ -1,0 +1,13 @@
+_german
+encodings.xml
+misc.xml
+modules.xml
+vcs.xml
+workspace.xml
+vendor
+.idea
+.DS_Store
+ko-KR*
+ko-KR*/
+TODO.TXT
+.vscode
