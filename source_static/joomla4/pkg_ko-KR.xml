@@ -16,9 +16,9 @@
 	<blockChildUninstall>true</blockChildUninstall>
 	<scriptfile>script.php</scriptfile>
 	<files>
-		<folder type="language" client="site" id="ko-KR">site_ko-KR.zip</folder>
-		<folder type="language" client="administrator" id="ko-KR">admin_ko-KR.zip</folder>
-		<folder type="language" client="api" id="ko-KR">api_ko-KR.zip</folder>
+		<folder type="language" client="site" id="ko-KR">language/ko-KR</folder>
+		<folder type="language" client="administrator" id="ko-KR">administrator/language/ko-KR</folder>
+		<folder type="language" client="api" id="ko-KR">api/language/ko-KR</folder>
 	</files>
 	<updateservers>
 		<server type="collection" priority="1" name="Accredited Joomla! Translations">

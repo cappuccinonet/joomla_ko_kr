@@ -4,20 +4,19 @@
 print_help() {
   echo "Joomla Koreanisch Sprachversion packen"
   echo ""
-  echo "xxxxxxx bash joomla4.sh"
+  echo "Verwendung: bash joomla4.sh -v 4.4.2v1 -d /Users/cappu/_WWW/_joomla/languages/ko-KR"
   echo ""
   echo "IMPORTANT: Update data in the following files:"
   echo "- source_static/joomla4/pkg_ko-KR.xml"
   echo "- source_static/joomla4/script.php"
   echo ""
-  echo "Pxxxxxx:"
+  echo "Parameter:"
   echo ""
   echo "  -h HELPT. Help text"
   echo "  -v VERSION   Joomla versions number, i. e. -v 4.4.2v1"
   echo "  -d DOCUMENT_ROOT  path to the document root, i. e. -d /Users/cappu/_WWW/_joomla/languages/ko-KR"
   echo ""
-  echo "Beispiel:"
-  echo "  bash joomla5.sh 5.0.2"
+
 }
 
 # Verarbeiten Sie die Parameter mit getopts
@@ -42,7 +41,7 @@ done
 
 # Überprüfen Sie, ob die 'version' Variable gesetzt ist
 if [ -z "$version" ]; then
-  echo "Error: Please pass a version number, i. e. -v 5.0.2v1."
+  echo "Error: Please pass a version number, i. e. -v 4.4.2."
   print_help
   exit 1
 fi
@@ -54,34 +53,19 @@ if [ -z "$document_root" ]; then
   exit 1
 fi
 
+path_to_source="/source/joomla_v4/translations/package/ko-KR"
 
-# 2.2 Remove the files in the /target folder
-rm -rf "${document_root}/target/joomla4/*"
+# 1.1 pkg_ko-KR.xml: copy pkg_ko-KR.xml to source folder
+cp "${document_root}/source_static/joomla4/pkg_ko-KR.xml" "${document_root}${path_to_source}/pkg_ko-KR.xml"
 
-# 2.3 Change into the target directory!!
-cd  "${document_root}/target/joomla4"
+# 1.2 script.php: copy script.php to source folder
+cp "${document_root}/source_static/joomla4/script.php" "${document_root}${path_to_source}/script.php"
 
-# 2.4 admin: zip the files in /source/joomla_v5/translations/package/ko-KR/administrator/language/ko-KR into the file admin_ko-KR.zip inside the /target/joomla5/ directory!
-zip -9 -v -r -j ./admin_ko-KR.zip "${document_root}/source/joomla_v4/translations/package/ko-KR/administrator/language/ko-KR"  -x "*/.git*" -x "*/.vscode*" -x "*.gitignore" -x "**/.DS_Store" -x "*TODO.TXT" -x "*CHANGELOG.TXT" -x "*composer.json" -x "*composer.lock"
+# 1.3 Change to source folder 
+cd "${document_root}${path_to_source}"
 
-# 2.5 site:
-zip -9 -v -r -j ./site_ko-KR.zip "${document_root}/source/joomla_v4/translations/package/ko-KR/language/ko-KR"  -x "*/.git*" -x "*/.vscode*" -x "*.gitignore" -x "**/.DS_Store" -x "*TODO.TXT" -x "*CHANGELOG.TXT" -x "*composer.json" -x "*composer.lock"
+# 1.4 zip the files inside the source directory
+zip -9 -v -r "./ko-KR_joomla_lang_full_${version}.zip" "./"
 
-# 2.6 api:
-zip -9 -v -r -j ./api_ko-KR.zip "${document_root}/source/joomla_v4/translations/package/ko-KR/api/language/ko-KR"  -x "*/.git*" -x "*/.vscode*" -x "*.gitignore" -x "**/.DS_Store" -x "*TODO.TXT" -x "*CHANGELOG.TXT" -x "*composer.json" -x "*composer.lock"
-
-# 2.7 pkg_ko-KR.xml: Replace version number 
-# You need to add your own command here to replace the version number
-
-# 2.8 pkg_ko-KR.xml: copy pkg_ko-KR.xml to the new directory
-cp "${document_root}/source_static/joomla4/pkg_ko-KR.xml" "${document_root}/target/joomla4/pkg_ko-KR.xml"
-
-# 2.9 script.php: replace the version number (just for major version number changes)
-# You need to add your own command here to replace the version number
-
-# 2.10 script.php: copy the language files to the new directory
-cp "${document_root}/source_static/joomla4/script.php" "${document_root}/target/joomla4/script.php"
-
-# 2.10 Change Version Number in following zip and zip the files inside the target directory
-cd "${document_root}"
-zip -9 -v -r -j "./ko-KR_joomla_lang_full_${version}.zip" "${document_root}/target/joomla4"
+# 1.5 copy the zip file to the document root
+mv "./ko-KR_joomla_lang_full_${version}.zip"  "${document_root}"
